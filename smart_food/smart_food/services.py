@@ -80,7 +80,7 @@ def login(email, password):
     with get_conn() as c:
         row = c.execute("SELECT * FROM users WHERE email=?", ((email or "").strip().lower(),)).fetchone()
     if not row:
-        raise ServiceError("User not found")
+        raise ServiceError("User Email not found")
     if not _verify(password or "", row["password_hash"]):
         raise ServiceError("Wrong password")
     return _user_dict(row)
